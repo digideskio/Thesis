@@ -39,4 +39,10 @@ public class RandomQuestion extends Question {
 		return null;
 	}
 
+	@Override
+	public void update(User user, Response response, double correctness) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

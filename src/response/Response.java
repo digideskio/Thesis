@@ -47,6 +47,7 @@ public abstract class Response {
 	public abstract double getConfidence();	
 	public abstract void setConfidence(double confidence);
 	public abstract void update(User user, Question question, boolean correct);
+	public abstract void update(User user, Question question, double correctness);
 	public abstract void update(User user, Question question);
 
 }

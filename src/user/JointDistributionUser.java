@@ -74,6 +74,12 @@ public class JointDistributionUser extends User {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void update(Question question, Response response, double correctness) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

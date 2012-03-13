@@ -35,4 +35,10 @@ public class SVMResponse extends Response {
 		
 	}
 
+	@Override
+	public void update(User user, Question question, double correctness) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

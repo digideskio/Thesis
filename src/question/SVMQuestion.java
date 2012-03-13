@@ -53,4 +53,10 @@ public class SVMQuestion extends Question {
 		train.run(arguments);
 	}
 
+	@Override
+	public void update(User user, Response response, double correctness) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

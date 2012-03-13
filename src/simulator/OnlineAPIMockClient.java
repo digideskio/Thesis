@@ -12,10 +12,11 @@ public class OnlineAPIMockClient {
 	
 	OnlineAPI api;
 	Map<Integer, Integer> ANSWER_KEY;
-	static String[] arguments = {"pairwise"};
+	static String[] arguments = {"independent"};
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		OnlineAPIMockClient client = new OnlineAPIMockClient();
+		client.bootstrap(new File("src/data/bootstrap"));
 		client.simulate(new File("src/data/training_clean2"));
 	}
 	
@@ -24,37 +25,46 @@ public class OnlineAPIMockClient {
 		ANSWER_KEY = getAnswerKey();
 	}
 	
+	public void bootstrap(File input) throws IOException {
+		System.out.println("Bootstrapping...");
+		BufferedReader reader = new BufferedReader(new FileReader(input));
+		String line = reader.readLine();
+		while ((line = reader.readLine()) != null) {
+			String[] arr = line.split(",");
+			boolean correct = arr[0].equals("1");
+			int user_id = Integer.parseInt(arr[2]);
+			int question_id = Integer.parseInt(arr[3]);
+			int response_id = Integer.parseInt(arr[12]);
+			api.update(user_id, question_id, response_id, correct);
+		}
+	}
+	
 	public void simulate(File input) {
-		System.out.println("Training...");
+		System.out.println("Simulating...");
+		int total = 0;
+		int numCorrect = 0;
+		int i = 0;
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(input));
 			String line = reader.readLine();
-			int i = 0;
 			while ((line = reader.readLine()) != null) {
 				String[] arr = line.split(",");
-				if (i%10000 == 0) System.out.println(i);
-				i++;
 				boolean correct = arr[0].equals("1");
 				int user_id = Integer.parseInt(arr[2]);
 				int question_id = Integer.parseInt(arr[3]);
 				int response_id = Integer.parseInt(arr[12]);
-				if (question_id < 1000) api.update(user_id, question_id, response_id, correct);
-				else api.update(user_id, question_id, response_id);
-			}
-			
-			System.out.println("Testing...");
-			int total = 0;
-			int numCorrect = 0;
-			int a_id;
-			for (int q_id = 1000; q_id < 6046; q_id++) {
-				if (ANSWER_KEY.containsKey(q_id)) {
+				int answer = api.getAnswer(question_id);
+				if (question_id > 1000 && ANSWER_KEY.containsKey(question_id)) {
 					total++;
-					a_id = api.getAnswer(q_id);
-					if (a_id == ANSWER_KEY.get(q_id)) numCorrect++;
+					if (answer == ANSWER_KEY.get(question_id)) {
+						numCorrect++;
+					}
+//					api.update(user_id, question_id, response_id, correct);
+					api.update(user_id, question_id, response_id);
+					i++;
+					if (i%100000 == 0) System.out.println(numCorrect / (double) total);
 				}
 			}
-			
-			System.out.println(numCorrect / (double) total);
 			
 		} catch (FileNotFoundException e) {
 			System.out.println("Couldn't find file");

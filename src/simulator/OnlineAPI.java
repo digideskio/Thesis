@@ -40,9 +40,10 @@ public class OnlineAPI {
 	
 	public int getAnswer(int questionID) {
 		Response best = new MaxResponse(-1, null);
+		best.setConfidence(Double.NEGATIVE_INFINITY);
 		for (Model model : models) {
 			Response temp = model.getBestResponse(questionID);
-			if (temp.getConfidence() > best.getConfidence()) {
+			if (temp!= null && temp.getConfidence() > best.getConfidence()) {
 				best = temp;
 			}
 		}

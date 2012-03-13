@@ -48,5 +48,10 @@ public class BayesianAverageResponse extends Response {
 		global_num_votes.increment(question);
 		this_num_votes++;
 	}
+
+	@Override
+	public void update(User user, Question question, double correctness) {
+		
+	}
 	
 }

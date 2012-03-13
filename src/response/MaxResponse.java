@@ -12,14 +12,12 @@ public class MaxResponse extends Response {
 
 	@Override
 	public double getConfidence() {
-		// TODO Auto-generated method stub
-		return 0;
+		return confidence;
 	}
 
 	@Override
 	public void setConfidence(double confidence) {
-		// TODO Auto-generated method stub
-		
+		this.confidence = confidence;
 	}
 
 	@Override
@@ -30,7 +28,12 @@ public class MaxResponse extends Response {
 	@Override
 	public void update(User user, Question question) {
 		users.add(user);
-//		question.addResponse(this);
+		
+	}
+
+	@Override
+	public void update(User user, Question question, double correctness) {
+		// TODO Auto-generated method stub
 		
 	}
 

@@ -4,27 +4,38 @@ import question.Question;
 import response.Response;
 
 public class SimpleUser extends User {
+	
+	int correct;
+	int total;
+//	
+//	static int totalCorrect = 0;
+//	static int totalAnswered = 0;
 
 	public SimpleUser(int id) {
 		super(id);
-		// TODO Auto-generated constructor stub
+		correct = 1;
+		total = 1;
 	}
 
 	@Override
 	public double getAbility() {
-		// TODO Auto-generated method stub
-		return 1;
+		return correct / (double) total;
 	}
 
 	@Override
 	public void update(Question question, Response response, boolean correct) {
-		// TODO Auto-generated method stub
-		
+//		System.out.println(response + ":" + question.correctResponse);
+		if (correct) this.correct++;
+		total++;
 	}
 
 	@Override
 	public void update(Question question, Response response) {
-		// TODO Auto-generated method stub
+//		totalAnswered++;
+//		if (response.equals(question.correctResponse)) totalCorrect++;
+//		System.out.println(totalCorrect / (double) totalAnswered);
+//		System.out.println(response + ", " + question.correctResponse + ":" + response.equals(question.correctResponse));
+//		update(question, response, response.equals(question.correctResponse));
 		
 	}
 
@@ -62,6 +73,12 @@ public class SimpleUser extends User {
 	public String currentParameters() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void update(Question question, Response response, double correctness) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

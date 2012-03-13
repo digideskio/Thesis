@@ -25,6 +25,7 @@ public abstract class User {
 	public abstract double getAbility();
 	
 	public abstract void update(Question question, Response response, boolean correct);
+	public abstract void update(Question question, Response response, double correctness);
 	
 	public abstract void update(Question question, Response response);
 	

@@ -2,16 +2,17 @@ package models;
 
 import question.IndependentClassifierQuestion;
 import question.Question;
-import response.PopularResponse;
+import response.IndependentResponse;
 import response.Response;
-import user.PriorUser;
+import user.SimpleUser;
 import user.User;
 
 public class IndependenceModel extends Model {
 
 	@Override
 	public User initializeUser(int userID) {
-		return new PriorUser(userID);
+//		return new PriorUser(userID);
+		return new SimpleUser(userID);
 	}
 
 	@Override
@@ -21,7 +22,7 @@ public class IndependenceModel extends Model {
 
 	@Override
 	public Response initializeResponse(int responseID, int questionID) {
-		return new PopularResponse(responseID, questions.get(questionID));
+		return new IndependentResponse(responseID, questions.get(questionID));
 	}
 	
 

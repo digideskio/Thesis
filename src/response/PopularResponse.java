@@ -16,16 +16,21 @@ public class PopularResponse extends Response {
 
 	@Override
 	public void setConfidence(double confidence) {
-		// TODO Auto-generated method stub
+		this.confidence = confidence;
 	}
 
 	@Override
 	public void update(User user, Question question, boolean correct) {
-//		users.add(user);
+		users.add(user);
 	}
 
 	@Override
 	public void update(User user, Question question) {
+		users.add(user);
+	}
+
+	@Override
+	public void update(User user, Question question, double correctness) {
 		users.add(user);
 	}
 

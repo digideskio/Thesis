@@ -39,6 +39,7 @@ public abstract class Question {
 	public abstract double getDifficulty();
 	
 	public abstract void update(User user, Response response, boolean correct);
+	public abstract void update(User user, Response response, double correctness);
 	public abstract void update(User user, Response response);
 	
 	public abstract Response getTopResponse();

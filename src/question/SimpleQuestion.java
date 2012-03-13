@@ -40,4 +40,10 @@ public class SimpleQuestion extends Question {
 		}
 		return bestResponse;
 	}
+
+	@Override
+	public void update(User user, Response response, double correctness) {
+		// TODO Auto-generated method stub
+		
+	}
 }

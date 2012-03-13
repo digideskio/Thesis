@@ -92,4 +92,10 @@ public class SVMUser extends User {
 		return null;
 	}
 
+	@Override
+	public void update(Question question, Response response, double correctness) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -93,4 +93,10 @@ public class PairwiseDependentQuestion extends Question {
 		return best;
 	}
 
+	@Override
+	public void update(User user, Response response, double correctness) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

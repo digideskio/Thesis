@@ -37,6 +37,16 @@ public abstract class Model {
 		response.update(user, question, correct);
 	}
 	
+	public void update(int userID, int questionID, int responseID, int correctness) {
+		prepMaps(userID, questionID, responseID);
+		User user = users.get(userID);
+		Question question = questions.get(questionID);
+		Response response = responses.get(responseID);
+		user.update(question, response, correctness);
+		question.update(user, response, correctness);
+		response.update(user, question, correctness);
+	}
+	
 	public void prepMaps(int userID, int questionID, int responseID) {
 		if (!users.containsKey(userID)) users.put(userID, initializeUser(userID));
 		if (!questions.containsKey(questionID)) questions.put(questionID, initializeQuestion(questionID));
@@ -44,11 +54,12 @@ public abstract class Model {
 	}
 	
 	public Response getBestResponse(int questionID) {
-//		System.out.println(questionID);
 		if (questions.containsKey(questionID)) {
+//			Response x = questions.get(questionID).getTopResponse();
+//			System.out.println(x);
+//			return x;
 			return questions.get(questionID).getTopResponse();
 		} else {
-//			System.out.println("Couldn't find anything");
 			return null;
 		}
 	}

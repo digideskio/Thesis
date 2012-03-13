@@ -47,10 +47,6 @@ public class PriorUser extends User {
 	@Override
 	public boolean getPrediction(Question question) {
 		return prior.value() > bestThreshold;
-//		double frac = right / (double) total;
-//		return Math.random() < 0.5;
-//		return prior.value() > 0.5;
-//		return true;
 	}
 
 	@Override
@@ -77,6 +73,13 @@ public class PriorUser extends User {
 	@Override
 	public String currentParameters() {
 		return "threshold " + threshold;
+	}
+
+	@Override
+	public void update(Question question, Response response, double correctness) {
+		prior.update(correctness > 0.5);
+		if (correctness > 0.5) numRight++;
+		else numWrong++;
 	}
 
 }
