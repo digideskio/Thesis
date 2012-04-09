@@ -35,7 +35,7 @@ public abstract class Model {
 		user.update(question, response, correct);
 		question.update(user, response, correct);
 		response.update(user, question, correct);
-	}
+ 	}
 	
 	public void update(int userID, int questionID, int responseID, int correctness) {
 		prepMaps(userID, questionID, responseID);
@@ -55,9 +55,6 @@ public abstract class Model {
 	
 	public Response getBestResponse(int questionID) {
 		if (questions.containsKey(questionID)) {
-//			Response x = questions.get(questionID).getTopResponse();
-//			System.out.println(x);
-//			return x;
 			return questions.get(questionID).getTopResponse();
 		} else {
 			return null;

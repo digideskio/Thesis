@@ -11,9 +11,12 @@ public class PairwiseDependentQuestion extends Question {
 	
 	static Map<Integer, Map<Integer, Integer>> pairwiseCorrect = new HashMap<Integer, Map<Integer,Integer>>();
 	static Map<Integer, Map<Integer, Integer>> pairwiseWrong = new HashMap<Integer, Map<Integer,Integer>>();
+	
+	IndependentClassifierQuestion independentQuestion;
 
 	public PairwiseDependentQuestion(int _id) {
 		super(_id);
+		independentQuestion = new IndependentClassifierQuestion(_id);
 	}
 
 	@Override
@@ -24,9 +27,11 @@ public class PairwiseDependentQuestion extends Question {
 
 	@Override
 	public void update(User user, Response response, boolean correct) {
+		responses.add(response);
 		for (User u : response.getUsers()) {
 			if (u != user) updateMap(user.getId(), u.getId(), correct);
 		}
+		independentQuestion.update(user, response, correct);
 	}
 	
 	public void updateMap(int userID1, int userID2, boolean correct) {
@@ -57,8 +62,8 @@ public class PairwiseDependentQuestion extends Question {
 
 	@Override
 	public void update(User user, Response response) {
-		// TODO Auto-generated method stub
-		
+		responses.add(response);
+		independentQuestion.update(user, response);
 	}
 	
 	public double getScore(int userID1, int userID2) {
@@ -89,6 +94,9 @@ public class PairwiseDependentQuestion extends Question {
 				best = response;
 				bestScore = score;
 			}
+		}
+		if (best.getId() == -1) {
+			return independentQuestion.getTopResponse();
 		}
 		return best;
 	}

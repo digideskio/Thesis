@@ -35,7 +35,7 @@ public class SimpleUser extends User {
 //		if (response.equals(question.correctResponse)) totalCorrect++;
 //		System.out.println(totalCorrect / (double) totalAnswered);
 //		System.out.println(response + ", " + question.correctResponse + ":" + response.equals(question.correctResponse));
-//		update(question, response, response.equals(question.correctResponse));
+//		if (question.responses.size() > 60) update(question, response, response.equals(question.correctResponse));
 		
 	}
 

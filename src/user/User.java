@@ -10,8 +10,11 @@ public abstract class User {
 	
 	protected int id;
 	
+	public int totalResponses;
+	
 	public User(int id) {
 		this.id = id;
+		totalResponses = 0;
 	}
 	
 	public void setId(int id) {

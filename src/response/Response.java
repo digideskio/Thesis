@@ -14,10 +14,13 @@ public abstract class Response {
 	
 	protected Set<User> users; 
 	
+	protected static Set<Response> responses = new HashSet<Response>();
+	
 	public Response(int id, Question question) {
 		this.setId(id);
 		this.question = question;
 		users = new HashSet<User>();
+		if (question != null) responses.add(this);
 	}
 	
 	public int getId() {
@@ -41,7 +44,11 @@ public abstract class Response {
 	}
 	
 	public String toString() {
-		return ""+getId();
+		return "" + getId();
+	}
+	
+	public Question getQuestion() {
+		return question;
 	}
 
 	public abstract double getConfidence();	

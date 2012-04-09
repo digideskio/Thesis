@@ -6,6 +6,8 @@ import models.IndependenceModel;
 import models.Model;
 import models.PairwiseDependenceModel;
 import models.PopularModel;
+import models.RaschModel;
+import models.SVMModel;
 import response.MaxResponse;
 import response.Response;
 
@@ -22,6 +24,10 @@ public class OnlineAPI {
 				models.add(new IndependenceModel());
 			} else if (modelName == "pairwise") {
 				models.add(new PairwiseDependenceModel());
+			} else if (modelName == "svm") {
+				models.add(new SVMModel());
+			} else if (modelName == "rasch") {
+				models.add(new RaschModel());
 			}
 		}
 	}
@@ -43,10 +49,15 @@ public class OnlineAPI {
 		best.setConfidence(Double.NEGATIVE_INFINITY);
 		for (Model model : models) {
 			Response temp = model.getBestResponse(questionID);
+			if (temp != null) {
+//				System.out.println(temp.getId());
+//				System.out.println(temp.getConfidence());
+			}
 			if (temp!= null && temp.getConfidence() > best.getConfidence()) {
 				best = temp;
 			}
 		}
+//		System.out.println(best.getId());
 		return best.getId();
 	}
 

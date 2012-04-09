@@ -6,13 +6,14 @@ import response.IndependentResponse;
 import response.Response;
 import user.SimpleUser;
 import user.User;
+import user.WeightedPriorUser;
 
 public class IndependenceModel extends Model {
 
 	@Override
 	public User initializeUser(int userID) {
-//		return new PriorUser(userID);
-		return new SimpleUser(userID);
+		return new WeightedPriorUser(userID);
+//		return new SimpleUser(userID);
 	}
 
 	@Override

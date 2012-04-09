@@ -24,6 +24,7 @@ public class IndependentResponse extends Response {
 				val += response.logProbIncorrect;
 			}
 		}
+//		System.out.println(val / (double) question.getUsers().size());
 		return val / (double) question.getUsers().size();
 	}
 
@@ -41,10 +42,12 @@ public class IndependentResponse extends Response {
 	@Override
 	public void update(User user, Question question, double correctness) {
 		users.add(user);
-		double ability = correctness;
-		logProbCorrect += Math.log(ability);
-		logProbIncorrect += ability == 1 ? SMALL_NUMBER : Math.log(1 - ability); 
 		this.question = question;
+		if (user.totalResponses > 10) {
+			double ability = correctness;
+			logProbCorrect += Math.log(ability);
+			logProbIncorrect += ability == 1 ? SMALL_NUMBER : Math.log(1 - ability);
+		}
 	}
 
 	@Override
